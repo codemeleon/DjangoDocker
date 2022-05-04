@@ -24,7 +24,7 @@ ENV PYTHONUNBUFFERED=1
 
 # install psycopg2 dependencies
 
-RUN apt-get update 
+RUN apt-get update
 RUN apt-get install build-essential -y
 RUN apt-get install gdal-bin -y
 #     && apt-get upgrade -y \
@@ -41,4 +41,6 @@ RUN pip install --upgrade pip
 
 RUN pip install -r requirements.txt
 RUN python manage.py collectstatic --noinput
+# https://pypi.org/project/django-crontab/
+RUN python manage.py crontab add
 
