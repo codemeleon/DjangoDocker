@@ -27,6 +27,7 @@ ENV PYTHONUNBUFFERED=1
 
 RUN apt-get update
 RUN apt-get install build-essential -y
+RUN apt-get install cron -y
 RUN apt-get install gdal-bin -y
 #     && apt-get upgrade -y \
 #     && apt-get install build-deps gcc python3-dev musl-dev \
