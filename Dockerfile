@@ -10,11 +10,12 @@ RUN git clone https://github.com/codemeleon/african_microbiome_portal.git $MICRO
 # TODO: Next line it not required if above commend works
 # RUN mkdir -p $MICRO_SERVICE
 # TODO: Add an static folder in the prject to avoid next line
-RUN mkdir -p $MICRO_SERVICE/static
-
-# where the code lives
 WORKDIR $MICRO_SERVICE
 RUN git checkout beta
+RUN rm -rf static
+#RUN mkdir -p $MICRO_SERVICE/static
+
+# where the code lives
 # RUN git pull
 
 # set environment variables
