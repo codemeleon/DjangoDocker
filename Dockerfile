@@ -42,6 +42,7 @@ RUN pip install --upgrade pip
 
 
 RUN pip install -r requirements.txt
+RUN python manage.py migrate --fake MicroBiome
 RUN python manage.py collectstatic --noinput
 # https://pypi.org/project/django-crontab/
 RUN python manage.py crontab add
