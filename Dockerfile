@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM python:3.8
+FROM python:3.9
 ENV MICRO_SERVICE=/home/app/african_microbiome_portal
 ENV APP_USER=anmol
 RUN adduser $APP_USER
@@ -42,7 +42,8 @@ RUN pip install --upgrade pip
 
 
 RUN pip install -r requirements.txt
-RUN python manage.py migrate --fake MicroBiome
+RUN bash clean.sh
+# RUN python manage.py migrate --fake MicroBiome
 RUN python manage.py collectstatic --noinput
 # https://pypi.org/project/django-crontab/
 RUN python manage.py crontab add
