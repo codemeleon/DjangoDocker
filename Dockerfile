@@ -12,6 +12,7 @@ RUN git clone https://github.com/codemeleon/african_microbiome_portal.git $MICRO
 # TODO: Add an static folder in the prject to avoid next line
 WORKDIR $MICRO_SERVICE
 RUN git checkout beta
+RUN git pull
 RUN rm -rf static
 #RUN mkdir -p $MICRO_SERVICE/static
 
@@ -43,9 +44,9 @@ RUN pip install --upgrade pip
 
 
 RUN pip install -r requirements.txt
-RUN bash clean.sh
 # RUN python manage.py migrate --fake MicroBiome
 RUN python manage.py collectstatic --noinput
 # https://pypi.org/project/django-crontab/
 RUN python manage.py crontab add
+RUN bash clean.sh
 
