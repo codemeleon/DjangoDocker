@@ -14,7 +14,7 @@ WORKDIR $MICRO_SERVICE
 RUN git checkout beta
 RUN git pull
 RUN rm -rf static
-COPY .env ./
+COPY .env ./Database/
 #RUN mkdir -p $MICRO_SERVICE/static
 
 # where the code lives
