@@ -49,5 +49,11 @@ RUN pip install -r requirements.txt
 RUN python manage.py collectstatic --noinput
 # https://pypi.org/project/django-crontab/
 RUN python manage.py crontab add
-RUN bash clean.sh
+RUN rm -r MicroBiome/__pycache__
+RUN rm -r MicroBiome/migrations
+RUN rm db.sqlite3
+RUN python manage.py makemigrations MicroBiome
+RUN python manage.py migrate
+RUN python manage.py su
+#RUN bash clean.sh
 
