@@ -5,14 +5,15 @@ ENV APP_USER=anmol
 RUN adduser $APP_USER
 
 RUN rm -rf $MICRO_SERVICE
-RUN git clone https://github.com/codemeleon/african_microbiome_portal.git $MICRO_SERVICE
+COPY african_microbiome_portal /home/app/african_microbiome_portal
+# RUN git clone https://github.com/codemeleon/african_microbiome_portal.git $MICRO_SERVICE
 # RUN git clone https://github.com/codemeleon/sampleDjangoApp.git $MICRO_SERVICE
 # TODO: Next line it not required if above commend works
 # RUN mkdir -p $MICRO_SERVICE
 # TODO: Add an static folder in the prject to avoid next line
 WORKDIR $MICRO_SERVICE
-RUN git checkout beta
-RUN git pull
+# RUN git checkout beta
+# RUN git pull
 RUN rm -rf static
 COPY .env ./Database/
 #RUN mkdir -p $MICRO_SERVICE/static
@@ -46,14 +47,14 @@ RUN pip install --upgrade pip
 
 RUN pip install -r requirements.txt
 # RUN python manage.py migrate --fake MicroBiome
-RUN python manage.py collectstatic -c --noinput
 # https://pypi.org/project/django-crontab/
 RUN python manage.py crontab add
 #RUN rm -r MicroBiome/__pycache__
-#RUN rm -r MicroBiome/migrations
+RUN rm -r MicroBiome/migrations
 #RUN rm db.sqlite3
-#RUN python manage.py makemigrations MicroBiome
-#RUN python manage.py migrate
+RUN python manage.py makemigrations MicroBiome
+RUN python manage.py migrate
+RUN python manage.py collectstatic -c --noinput
 #RUN python manage.py su
-RUN bash clean.sh
+#RUN bash clean.sh
 
